@@ -2,6 +2,8 @@
 title: 查詢音樂
 ---
 
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
 ## 功能
 
 根據關鍵字查詢音樂資料
@@ -9,7 +11,7 @@ title: 查詢音樂
 ## 來源
 
 <Cards>
-  <Card title="批評空間" href="https://erogamescape.dyndns.org/" />
+  <Card title="⭐erogamescape(批評空間)" href="https://erogamescape.dyndns.org/" />
 </Cards>
 
 ## 參數
@@ -17,6 +19,13 @@ title: 查詢音樂
 | 名稱 | 說明 | 可選選項 |
 |--------| ---------- | ---- |
 | keyword | 要查詢的關鍵字 | // |
-| 列表搜尋 | 見[列表搜尋](/docs/共用參數/列表搜尋) | // |
 
 ![search-music](https://image.kurohelper.com/docs/search-music.png)
+
+<Accordions type="multiple">
+  <Accordion title="📌V2更新">
+  * 刪除列表搜尋參數，查詢流程會變成在第一次搜尋時強制進行列表的行為，後續再透過選單選擇要查看的音樂資料<br />
+  </Accordion>
+</Accordions>
+
+![demo1](https://image.kurohelper.com/docs/search-music-demo1.png)
