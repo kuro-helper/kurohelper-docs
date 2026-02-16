@@ -2,6 +2,8 @@
 title: 查詢遊戲
 ---
 
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
 ## 功能
 
 根據關鍵字查詢遊戲資料
@@ -9,19 +11,30 @@ title: 查詢遊戲
 ## 來源
 
 <Cards>
-  <Card title="⭐批評空間" href="https://erogamescape.dyndns.org/" />
+  <Card title="⭐erogamescape(批評空間)" href="https://erogamescape.dyndns.org/" />
   <Card title="VNDB" href="https://vndb.org/" />
 </Cards>
 
 ## 參數
 
-| 名稱 | 說明 | 可選選項 |
-|--------| ---------- | ---- |
-| keyword | 要查詢的關鍵字 | // |
-| 列表搜尋 | 見[列表搜尋](/docs/共用參數/列表搜尋) | // |
-| 查詢資料庫選項 | 要查詢的來源 | **erogamescape**, **VNDB**|
+| 名稱 | 說明 | 可選選項 | 預設值 |
+|--------| ---------- | ---- | --- |
+| keyword | 要查詢的關鍵字 | // | // |
+| 查詢資料庫選項 | 要查詢的來源 | **erogamescape**, **VNDB**| erogamescape |
 
 ![search-game](https://image.kurohelper.com/docs/search-game.png)
 
+<Accordions type="multiple">
+  <Accordion title="📌V2更新">
+  * 刪除列表搜尋參數，查詢流程會變成在第一次搜尋時強制進行列表的行為，後續再透過選單選擇要查看的遊戲資料<br />
+  </Accordion>
+</Accordions>
+
 ## 說明
 此指令會基於**批評空間**的資料進行搜尋，會查詢到最符合使用者輸入的字串的該筆遊戲並回傳詳細資料。這之間經過了多層的查詢優化，如果有預想中應該查到資料的關鍵字但沒有查到的話，**請將關鍵字放寬**，或加入群組提出優化建議。
+
+![demo1](https://image.kurohelper.com/docs/search-game-demo1.png)
+
+![demo2](https://image.kurohelper.com/docs/search-game-demo2.png)
+
+![demo3](https://image.kurohelper.com/docs/search-game-demo3.png)

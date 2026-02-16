@@ -2,14 +2,16 @@
 title: 查詢創作者
 ---
 
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
 ## 功能
 
-根據關鍵字查詢創作者資料(腳本家、聲優、繪師、音樂等)
+根據關鍵字查詢創作者資料(腳本家、聲優、繪師、音樂製作等)
 
 ## 來源
 
 <Cards>
-  <Card title="批評空間" href="https://erogamescape.dyndns.org/" />
+  <Card title="⭐erogamescape(批評空間)" href="https://erogamescape.dyndns.org/" />
 </Cards>
 
 ## 參數
@@ -17,6 +19,14 @@ title: 查詢創作者
 | 名稱 | 說明 | 可選選項 |
 |--------| ---------- | ---- |
 | keyword | 要查詢的關鍵字 | // |
-| 列表搜尋 | 見[列表搜尋](/docs/共用參數/列表搜尋) | // |
 
 ![search-creator](https://image.kurohelper.com/docs/search-creator.png)
+
+<Accordions type="multiple">
+  <Accordion title="📌V2更新">
+  * 刪除列表搜尋參數，查詢流程會變成在第一次搜尋時強制進行列表的行為，後續再透過**按鈕**選擇要查看的創作者資料<br />
+  * 創作者資料是以遊戲為一個單位，所以也可以導向遊戲的詳細資料
+  </Accordion>
+</Accordions>
+
+![demo1](https://image.kurohelper.com/docs/search-creator-demo1.png)

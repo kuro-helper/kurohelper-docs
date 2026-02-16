@@ -2,6 +2,8 @@
 title: 查詢角色
 ---
 
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
 ## 功能
 
 根據關鍵字查詢角色資料
@@ -9,17 +11,27 @@ title: 查詢角色
 ## 來源
 
 <Cards>
-  <Card title="⭐VNDB" href="https://vndb.org/" />
-  <Card title="批評空間" href="https://erogamescape.dyndns.org/" />
+  <Card title="VNDB" href="https://vndb.org/" />
   <Card title="Bangumi" href="https://bangumi.tv/" />
 </Cards>
 
 ## 參數
 
-| 名稱 | 說明 | 可選選項 |
-|--------| ---------- | ---- |
-| keyword | 要查詢的關鍵字 | // |
-| 列表搜尋 | 見[列表搜尋](/docs/共用參數/列表搜尋) | // |
-| 查詢資料庫選項 | 要查詢的來源 | **VNDB**, **erogamescape**, **Bangumi** |
+| 名稱 | 說明 | 可選選項 | 預設值 |
+|--------| ---------- | ---- | --- |
+| keyword | 要查詢的關鍵字 | // | // |
+| 查詢資料庫選項 | 要查詢的來源 | **VNDB**, **Bangumi** | **VNDB** |
 
 ![search-character](https://image.kurohelper.com/docs/search-character.png)
+
+<Accordions type="multiple">
+  <Accordion title="📌V2更新">
+  * 刪除列表搜尋參數，查詢流程會變成在第一次搜尋時強制進行列表的行為，後續再透過選單選擇要查看的角色資料<br />
+  * **移除批評空間查詢(因資料過於不齊全)**<br />
+  * **Bangumi搜尋時不會有以前列表搜尋的效果，直接查出最符合關鍵字的資料**
+  </Accordion>
+</Accordions>
+
+![demo1](https://image.kurohelper.com/docs/search-character-demo1.png)
+
+![demo2](https://image.kurohelper.com/docs/search-character-demo2.png)
