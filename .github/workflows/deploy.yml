@@ -1,0 +1,126 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    env:
+      VPS_IP: ${{ secrets.VPS_IP }}
+      VPS_USERNAME: ${{ secrets.VPS_USERNAME }}
+      VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+      VPS_DEPLOY_BASE: ${{ secrets.VPS_DEPLOY_BASE }}
+    steps:
+      - name: Check Secrets
+        run: |
+          set -euo pipefail
+          missing=0
+          for name in VPS_IP VPS_USERNAME VPS_SSH_KEY VPS_DEPLOY_BASE; do
+            if [ -z "${!name:-}" ]; then
+              echo "::error::缺少必要的 Secret：$name"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            exit 1
+          fi
+
+  build:
+    needs: preflight
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write
+    env:
+      OUTPUT_NAME: ${{ format('{0}-{1}', github.event.repository.name, github.ref_name) }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: yarn
+          cache-dependency-path: yarn.lock
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build
+
+      - name: Package standalone output
+        run: |
+          set -euo pipefail
+          if [ ! -d .next/standalone ]; then
+            echo "::error::找不到 .next/standalone，請確認 next.config 已設定 output: 'standalone'"
+            exit 1
+          fi
+
+          mkdir -p "$OUTPUT_NAME"
+          cp -a .next/standalone/. "$OUTPUT_NAME/"
+          mkdir -p "$OUTPUT_NAME/.next"
+          cp -a .next/static "$OUTPUT_NAME/.next/static"
+
+          if [ -d public ]; then
+            cp -a public "$OUTPUT_NAME/public"
+          fi
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: ${{ env.OUTPUT_NAME }}
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      REPO_NAME: ${{ github.event.repository.name }}
+      OUTPUT_NAME: ${{ format('{0}-{1}', github.event.repository.name, github.ref_name) }}
+    steps:
+      - name: Download build output
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: dist
+
+      - name: Prepare upload directory
+        run: |
+          set -euo pipefail
+          if [ ! -d dist ] || [ -z "$(ls -A dist)" ]; then
+            echo "::error::找不到編譯產物"
+            exit 1
+          fi
+
+          if [ -d "dist/${OUTPUT_NAME}" ]; then
+            source_dir="dist/${OUTPUT_NAME}"
+          else
+            source_dir="dist"
+          fi
+
+          mkdir -p upload
+          cp -a "${source_dir}/." upload/
+
+      - name: Upload to VPS
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "upload/*"
+          target: "${{ secrets.VPS_DEPLOY_BASE }}/${{ env.REPO_NAME }}/"
+          strip_components: 1
+          overwrite: true
+
+      - name: Show deployment info
+        run: |
+          echo "部署 ref：${{ github.ref }} (${{ github.sha }})"
+          echo "已部署至 ${{ secrets.VPS_DEPLOY_BASE }}/${{ env.REPO_NAME }}/"
