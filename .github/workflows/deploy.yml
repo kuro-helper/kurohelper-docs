@@ -36,8 +36,6 @@ jobs:
     permissions:
       contents: read
       actions: write
-    env:
-      OUTPUT_NAME: ${{ format('{0}-{1}', github.event.repository.name, github.ref_name) }}
     steps:
       - uses: actions/checkout@v5
 
@@ -62,20 +60,19 @@ jobs:
             exit 1
           fi
 
-          mkdir -p "$OUTPUT_NAME"
-          cp -a .next/standalone/. "$OUTPUT_NAME/"
-          mkdir -p "$OUTPUT_NAME/.next"
-          cp -a .next/static "$OUTPUT_NAME/.next/static"
+          mkdir -p .next/standalone/.next
+          cp -a .next/static .next/standalone/.next/static
 
           if [ -d public ]; then
-            cp -a public "$OUTPUT_NAME/public"
+            cp -a public .next/standalone/public
           fi
 
       - name: Upload build output
         uses: actions/upload-artifact@v4
         with:
           name: build-output
-          path: ${{ env.OUTPUT_NAME }}
+          path: .next/standalone
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 7
 
@@ -84,7 +81,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REPO_NAME: ${{ github.event.repository.name }}
-      OUTPUT_NAME: ${{ format('{0}-{1}', github.event.repository.name, github.ref_name) }}
     steps:
       - name: Download build output
         uses: actions/download-artifact@v4
@@ -92,22 +88,16 @@ jobs:
           name: build-output
           path: dist
 
-      - name: Prepare upload directory
-        run: |
-          set -euo pipefail
-          if [ ! -d dist ] || [ -z "$(ls -A dist)" ]; then
-            echo "::error::找不到編譯產物"
-            exit 1
-          fi
-
-          if [ -d "dist/${OUTPUT_NAME}" ]; then
-            source_dir="dist/${OUTPUT_NAME}"
-          else
-            source_dir="dist"
-          fi
-
-          mkdir -p upload
-          cp -a "${source_dir}/." upload/
+      - name: Ensure remote deploy directory
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script_stop: true
+          script: |
+            set -euo pipefail
+            mkdir -p "${{ secrets.VPS_DEPLOY_BASE }}/${{ env.REPO_NAME }}"
 
       - name: Upload to VPS
         uses: appleboy/scp-action@v1.0.0
@@ -115,7 +105,7 @@ jobs:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          source: "upload/*"
+          source: "dist/*"
           target: "${{ secrets.VPS_DEPLOY_BASE }}/${{ env.REPO_NAME }}/"
           strip_components: 1
           overwrite: true
