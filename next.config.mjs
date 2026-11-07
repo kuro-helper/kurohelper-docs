@@ -6,6 +6,22 @@ const withMDX = createMDX();
 const config = {
   reactStrictMode: true,
   output: "standalone",
+  async redirects() {
+    const permanent = process.env.NODE_ENV === "production";
+
+    return [
+      {
+        source: "/docs",
+        destination: "/",
+        permanent,
+      },
+      {
+        source: "/docs/:slug+",
+        destination: "/:slug*",
+        permanent,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
