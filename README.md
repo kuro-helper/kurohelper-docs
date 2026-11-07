@@ -1,54 +1,21 @@
-# kurohelper-doc
+# KuroHelper 使用說明文件
 
-This is a Next.js application generated with
-[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
+KuroHelper（小黑）是一個以 Galgame 資料查詢為主的 Discord 機器人。本專案提供給使用者閱讀的操作文件，說明各項指令的用途、參數與使用方式，協助你查找作品資料、管理遊戲紀錄，並了解最新功能與注意事項。
 
-This project uses Yarn 1.22.22. Install dependencies using the lockfile:
+[閱讀使用說明](https://docs.kurohelper.com/)
 
-```bash
-yarn install --frozen-lockfile
-```
+## 文件內容
 
-Run the development server:
+- **資料查詢**：遊戲、公司品牌、創作者、角色、音樂與歌手的查詢方式，以及各指令使用的資料來源。
+- **遊戲紀錄與收藏**：加入已玩遊戲、收藏感興趣的作品、取消紀錄，以及查看個人資料與品牌統計。
+- **帳號與隱私**：網站帳號註冊、忘記密碼，以及個人遊戲資料的公開設定。
+- **每日簽到**：今日運勢、連續簽到天數與稱號的取得方式。
+- **其他功能與疑難排解**：隨機遊戲、隨機角色、公告閱讀、版本更新與常見錯誤說明。
 
-```bash
-yarn dev
-```
+## 如何閱讀
 
-Open http://localhost:3000 with your browser to see the result.
+前往說明網站後，可以透過側邊欄或搜尋找到想了解的功能。各指令頁面會列出可用參數、操作步驟與結果說明；初次使用時，也可以先從首頁了解如何將小黑加入 Discord 伺服器。
 
-Check types and build for production:
+## 問題回報與建議
 
-```bash
-yarn typecheck
-yarn build
-```
-
-## Explore
-
-In the project, you can see:
-
-- `lib/source.ts`: Code for content source adapter, [`loader()`](https://fumadocs.dev/docs/headless/source-api) provides the interface to access your content.
-- `lib/layout.shared.tsx`: Shared options for layouts, optional but preferred to keep.
-
-| Route                     | Description                                            |
-| ------------------------- | ------------------------------------------------------ |
-| `app/(home)`              | The route group for your landing page and other pages. |
-| `app/docs`                | The documentation layout and pages.                    |
-| `app/api/search/route.ts` | The Route Handler for search.                          |
-
-### Fumadocs MDX
-
-A `source.config.ts` config file has been included, you can customise different options like frontmatter schema.
-
-Read the [Introduction](https://fumadocs.dev/docs/mdx) for further details.
-
-## Learn More
-
-To learn more about Next.js and Fumadocs, take a look at the following
-resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Fumadocs](https://fumadocs.dev) - learn about Fumadocs
+如果遇到操作問題、發現文件內容有誤，或想提出功能建議，歡迎加入[小黑討論群](https://discord.gg/6rkrm7tsXr)回報，也可以在群組取得最新消息。
