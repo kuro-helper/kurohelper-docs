@@ -7,7 +7,12 @@ const config = {
   reactStrictMode: true,
   output: "standalone",
   images: {
-    domains: ["cdn.kurohelper.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.kurohelper.com",
+      },
+    ],
   },
 };
 

@@ -8,7 +8,59 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 ![random-game](https://cdn.kurohelper.com/docs/kurohelper-banner.png)
 
 <Accordions type="multiple">
-  <Accordion title="最近更新(v2.0.0)">
+  <Accordion title="最近更新(v2.11.0)">
+  * 「[公告](/docs/指令/公告)」新增分頁，每頁顯示 5 則，可翻閱較舊的公告<br />
+  </Accordion>
+  <Accordion title="v2.10.0">
+  * 「[個人資料](/docs/指令/個人資料)」改為直接選取使用者，不需要手動輸入 Discord ID<br />
+  * 連續「[簽到](/docs/指令/簽到)」達 100 天可獲得稱號，並可在個人資料中查看<br />
+  </Accordion>
+  <Accordion title="v2.9.2">
+  * 新增「[忘記密碼](/docs/指令/忘記密碼)」指令，可重設自己綁定的網站帳號密碼<br />
+  </Accordion>
+  <Accordion title="v2.9.1">
+  * 調整個人資料的建檔日期及遊玩結束日期顯示<br />
+  </Accordion>
+  <Accordion title="v2.9.0">
+  * 新增「[公告](/docs/指令/公告)」指令，可從列表選擇公告查看詳細內容<br />
+  </Accordion>
+  <Accordion title="v2.8.1">
+  * 遊戲查詢、品牌遊戲列表及個人資料新增 🎮 遊玩中、⏸️ 擱置、🗑️ 棄坑等狀態標記<br />
+  </Accordion>
+  <Accordion title="v2.8.0">
+  * 開放「[註冊帳號](/docs/指令/註冊帳號)」，可取得私人連結註冊網站帳號<br />
+  * 「運勢」改為「[簽到](/docs/指令/簽到)」，每天可抽取一次運勢，並顯示連續簽到天數<br />
+  </Accordion>
+  <Accordion title="v2.7.1">
+  * 「[查詢創作者](/docs/指令/查詢創作者)」的作品現在會顯示更詳細的職務名稱<br />
+  * 「[個人資料](/docs/指令/個人資料)」的品牌統計，遊玩數量相同的品牌會合併在同一星級<br />
+  </Accordion>
+  <Accordion title="v2.7.0">
+  * 新增「[帳號設定](/docs/指令/帳號設定)」，可設定是否隱藏個人建檔資料<br />
+  * 「個人資料」新增選填的 Discord ID，可查詢其他使用者公開的資料<br />
+  * 查詢結果新增第一頁、最後一頁按鈕，並調整部分列表每頁筆數，改善顯示異常<br />
+  </Accordion>
+  <Accordion title="v2.6.0">
+  * 「刪除已玩」與「刪除收藏」合併為「[刪除使用者遊戲資料](/docs/指令/刪除使用者遊戲資料)」，透過移除類型選擇要取消的紀錄<br />
+  * 個人資料的已玩／收藏清單整合為遊戲列表，以 ✅ 與 ❤️ 標示<br />
+  </Accordion>
+  <Accordion title="v2.5.0">
+  * 「查詢公司品牌」「查詢音樂」「加已玩」「加收藏」新增輸入建議，並將建議選項上限提高到 20 筆<br />
+  </Accordion>
+  <Accordion title="v2.4.0">
+  * 「查詢遊戲」新增遊戲名稱輸入建議<br />
+  </Accordion>
+  <Accordion title="v2.3.0">
+  * 新增「[查詢歌手](/docs/指令/查詢歌手)」指令，可查詢歌手及音樂作品，並從作品選單查看音樂詳細資料<br />
+  </Accordion>
+  <Accordion title="v2.2.0">
+  * 修正「加已玩」及「加收藏」查不到遊戲時的異常，現在會正常顯示找不到結果的提示<br />
+  </Accordion>
+  <Accordion title="v2.1.0">
+  * 新增「運勢」指令，抽抽今天的運勢（現已整合至「[簽到](/docs/指令/簽到)」）<br />
+  * 修正部分指令未出現在斜線指令列表的問題<br />
+  </Accordion>
+  <Accordion title="v2.0.0">
   * 更新五大查詢指令成v2版本，詳情請看各指令說明<br />
   </Accordion>
 </Accordions>
@@ -19,12 +71,12 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Steps>
 <Step>
-### 使用Discord連結將小黑加入伺服器
+### 使用Discord連結將Bot加入伺服器
 https://discord.com/oauth2/authorize?client_id=1418225729241612298&permissions=3941734153714752&integration_type=0&scope=bot
 </Step>
 <Step>
 ### 使用斜線指令
-在發送訊息的地方輸入`/` 即可看到小黑的指令列表
+在發送訊息的地方輸入`/` 即可看到Bot的指令列表
 </Step>
 </Steps>
 

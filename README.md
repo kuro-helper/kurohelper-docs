@@ -3,17 +3,26 @@
 This is a Next.js application generated with
 [Create Fumadocs](https://github.com/fuma-nama/fumadocs).
 
-Run development server:
+This project uses Yarn 1.22.22. Install dependencies using the lockfile:
 
 ```bash
-npm run dev
-# or
-pnpm dev
-# or
+yarn install --frozen-lockfile
+```
+
+Run the development server:
+
+```bash
 yarn dev
 ```
 
 Open http://localhost:3000 with your browser to see the result.
+
+Check types and build for production:
+
+```bash
+yarn typecheck
+yarn build
+```
 
 ## Explore
 
